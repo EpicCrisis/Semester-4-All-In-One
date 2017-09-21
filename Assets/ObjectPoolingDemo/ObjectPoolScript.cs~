@@ -1,0 +1,26 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CustomObjectPoolScript : MonoBehaviour
+{
+
+	//create a singleton by getting private static
+	private static CustomObjectPoolScript instance;
+
+	//awake function to make sure it exists
+	void Awake ()
+	{
+		instance = this;
+	}
+
+	void Start ()
+	{
+		
+	}
+
+	void Update ()
+	{
+		
+	}
+}

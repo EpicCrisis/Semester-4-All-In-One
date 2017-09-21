@@ -1,0 +1,62 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SpawnManagerScript : MonoBehaviour {
+
+	public GameObject[] enemyPrefabList;
+	public List<EnemyBaseScript> enemyList = new List<EnemyBaseScript> ();
+
+	float spawnDurationCC;
+	public float spawnDuration;
+
+	void Start () {
+		
+	}
+	
+	void Update () {
+		
+		spawnDurationCC += Time.deltaTime;
+
+		if (spawnDurationCC > spawnDuration) {
+			
+			spawnDurationCC = 0f;
+			EnemyBaseScript.Type type;
+
+			if (enemyList.Count < 5) {
+				type = EnemyBaseScript.Type.ENEMY_01;
+			} else {
+				type = (EnemyBaseScript.Type)Random.Range(0, (int)EnemyBaseScript.Type.TOTAL);
+			}
+
+			Spawn (type);
+			/*
+			GameObject newEnemy = Spawn (type);
+
+			if (newEnemy.GetComponent<EnemyBaseScript> ().type == EnemyBaseScript.Type.ENEMY_03) {
+				Spawn (EnemyBaseScript.Type.ENEMY_01);
+				Spawn (EnemyBaseScript.Type.ENEMY_02);
+			}
+			*/
+		}
+	}
+
+	//factory method
+	GameObject Spawn (EnemyBaseScript.Type type)
+	{
+		GameObject newEnemy = null;
+
+		if (type == EnemyBaseScript.Type.ENEMY_01) {
+			newEnemy = Instantiate (enemyPrefabList [(int)type], new Vector2 (0f, 6.6f), Quaternion.identity);
+		} else if (type == EnemyBaseScript.Type.ENEMY_02) {
+			newEnemy = Instantiate (enemyPrefabList [(int)type], new Vector2 (0f, 6.6f), Quaternion.identity);
+		} else if (type == EnemyBaseScript.Type.ENEMY_03) {
+			newEnemy = Instantiate (enemyPrefabList [(int)type], new Vector2 (0f, 6.6f), Quaternion.identity);
+		} else {
+			Debug.Log ("UNKNOWN TYPE SPAWN");
+		}
+
+		enemyList.Add(newEnemy.GetComponent<EnemyBaseScript> ());
+		return newEnemy;
+	}
+}

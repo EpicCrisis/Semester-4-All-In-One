@@ -1,0 +1,23 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CustomResourceManagerScript : MonoBehaviour
+{
+
+	//instantiate all gameobjects here
+	void Start ()
+	{
+		string path = "CustomObjectPoolScript";
+		GameObject gamePath = Resources.Load (path) as GameObject;
+		GameObject go = Instantiate (gamePath) as GameObject;
+		go.name = "CustomObjectPoolScript";
+	}
+
+	void Update ()
+	{
+		if (Input.GetKeyDown (KeyCode.L)) {
+			//SceneManager.LoadScene ((SceneManager.GetActiveScene ().buildIndex + 1) % 2);
+		}
+	}
+}
